@@ -165,5 +165,5 @@ app.listen(PORT, '0.0.0.0', () => {
     }).on('error', (err) => {
       log(`Self-ping failed: ${err.message}`);
     });
-  }, 30000);
+  }, 60000);
 });
