@@ -153,17 +153,23 @@ app.post('/api/admin/logout', adminAuth, (req, res) => {
   res.json({ success: true });
 });
 
-app.listen(PORT, '0.0.0.0', () => {
+app.listen(PORT, () => {
   log('Server running on port ' + PORT);
 
-  // Self-ping كل دقيقة
-  setInterval(() => {
-    const host = process.env.RAILWAY_PUBLIC_DOMAIN;
-    if (!host) return;
-    https.get(`https://${host}/ping`, (res) => {
-      log(`Self-ping: ${res.statusCode}`);
-    }).on('error', (err) => {
-      log(`Self-ping failed: ${err.message}`);
-    });
-  }, 60000);
+  // Self-ping لمنع النوم على Render
+  const host = process.env.RENDER_EXTERNAL_HOSTNAME;
+  const PING_URL = host ? `https://${host}/ping` : null;
+
+  if (PING_URL) {
+    log(`Self-ping enabled: ${PING_URL}`);
+    setInterval(() => {
+      https.get(PING_URL, (res) => {
+        log(`Self-ping: ${res.statusCode}`);
+      }).on('error', (err) => {
+        log(`Self-ping failed: ${err.message}`);
+      });
+    }, 60000);
+  } else {
+    log('Self-ping disabled (local mode)');
+  }
 });
