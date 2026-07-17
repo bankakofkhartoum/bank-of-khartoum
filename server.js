@@ -2,8 +2,8 @@ const express = require('express');
 const path = require('path');
 const crypto = require('crypto');
 const cors = require('cors');
-const http = require('http');
-const https = require('https');
+// ← حذفنا: const http = require('http');
+// ← حذفنا: const https = require('https');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -160,24 +160,8 @@ app.post('/api/admin/logout', adminAuth, (req, res) => {
   res.json({ success: true });
 });
 
-// Start server
-app.listen(PORT, () => {
+// ← التغيير الوحيد هنا: أضفنا '0.0.0.0'
+app.listen(PORT, '0.0.0.0', () => {
   log('Server running on port ' + PORT);
-
-  // ✅ Self-Ping - يدعم Render بشكل صحيح
-  const host = process.env.RENDER_EXTERNAL_HOSTNAME;
-  const PING_URL = host ? `https://${host}/ping` : null;
-
-  if (PING_URL) {
-    log(`Self-ping enabled: ${PING_URL}`);
-    setInterval(() => {
-      https.get(PING_URL, (res) => {
-        log(`Self-ping: ${res.statusCode}`);
-      }).on('error', (err) => {
-        log(`Self-ping failed: ${err.message}`);
-      });
-    }, 60000);
-  } else {
-    log('Self-ping disabled (local mode)');
-  }
+  // ← حذفنا self-ping حق Render كلياً
 });
